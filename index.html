@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Catálogo de Camisas</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Oswald&display=swap" rel="stylesheet" />
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Oswald', sans-serif;
+    background-color: #f4f4f4;
+    color: #10395b;
+  }
+  header {
+    background-color: #10395b;
+    color: #a6a6a6;
+    padding: 25px;
+    text-align: center;
+  }
+  header img {
+    width: 290px;
+    margin-bottom: 15px;
+  }
+  header .logo {
+    font-size: 30px;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+  }
+  .container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  .produto {
+    padding: 30px 15px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    position: relative;
+  }
+  .produto:last-child {
+    border-bottom: none;
+  }
+  .produto img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  .produto h3 {
+    font-size: 26px;
+    font-family: 'Cinzel', serif;
+    margin-bottom: 5px; /* menos espaço aqui */
+    position: relative;
+  }
+  /* Novo: texto discreto "disponível para personalização" */
+  .personalizacao {
+    font-size: 12px;
+    color: #888888;
+    position: absolute;
+    right: 15px;
+    top: 40px; /* ajusta para ficar logo abaixo do h3 */
+    font-style: italic;
+    user-select: none;
+  }
+  .produto p {
+    font-size: 16px;
+    color: #555;
+    margin: 20px 0 30px 0; /* mais espaço entre descrição e seleções */
+    text-align: left;
+  }
+  .preco {
+    font-weight: bold;
+    color: #10395b;
+    font-size: 35px;
+    margin-bottom: 20px;
+  }
+
+  .selecao {
+    text-align: left;
+    position: absolute;
+    left: 15px;
+    bottom: 90px;
+  }
+  .selecao strong {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .opcoes {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .opcao-btn {
+    padding: 6px 12px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+  }
+  .opcao-btn:hover {
+    background-color: #ddd;
+  }
+  .opcao-btn.ativo {
+    background-color: #10395b;
+    color: white;
+    border-color: #10395b;
+  }
+  .disponibilidade {
+    font-size: 12px;
+    color: #10395b;
+    margin-bottom: 10px;
+    max-width: 200px;
+  }
+
+  .comprar-btn {
+    background-color: #10395b;
+    color: white;
+    padding: 18px 50px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 40px;
+    transition: background-color 0.3s ease;
+  }
+  .comprar-btn:hover {
+    background-color: #082136;
+  }
+
+  @media (max-width: 600px) {
+    .selecao {
+      position: static;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .produto p {
+      text-align: center;
+    }
+    .personalizacao {
+      position: static;
+      text-align: right;
+      margin-bottom: 10px;
+      top: auto;
+      right: auto;
+      font-style: italic;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="https://i.postimg.cc/x1ks3Ckv/logocinza-quadrada.png" alt="Logo da Loja" />
+  <div class="logo">Catálogo de Camisas</div>
+</header>
+
+<div class="container">
+
+  <!-- PRODUTO EXEMPLO -->
+  <!-- Copie e edite este bloco para cada camisa -->
+  <div class="produto" data-produto="tricolor">
+    <img src="https://i.postimg.cc/zGcBHq6H/tricolor.jpg" alt="Camisa Tricolor" />
+    <h3>
+      Camisa Torcedor 2025 | Esporte Clube Bahia | Puma Tricolor
+      <span class="personalizacao">*disponível para personalização</span>
+    </h3>
+    <p>Bahia Torcedor Away Jersey 25</p>
+    <div class="preco">R$ 150,00</div>
+
+    <!-- Seção de seleção de gênero e tamanho -->
+    <div class="selecao">
+      <strong>Gênero:</strong>
+      <div class="opcoes genero" data-produto="tricolor">
+        <div class="opcao-btn" data-genero="Masculina">Masc.</div>
+        <div class="opcao-btn" data-genero="Feminina">Fem.</div>
+      </div>
+
+      <strong>Tamanho:</strong>
+      <div class="opcoes tamanho" data-produto="tricolor">
+        <div class="opcao-btn" data-tamanho="P">P</div>
+        <div class="opcao-btn" data-tamanho="M">M</div>
+        <div class="opcao-btn" data-tamanho="G">G</div>
+        <div class="opcao-btn" data-tamanho="GG">GG</div>
+      </div>
+    </div>
+
+    <button class="comprar-btn">Comprar</button>
+  </div>
+
+  <!-- Produto 2 -->
+  <div class="produto" data-produto="amarela">
+    <img src="https://i.postimg.cc/CKnKjWpP/amarela.jpg" alt="Camisa Amarela" />
+    <h3>
+      Camisa Todas as Artes | Esporte Clube Bahia
+      <span class="personalizacao">*disponível para personalização</span>
+    </h3>
+    <p>Of Camisa Todas as Cores ECB.</p>
+    <div class="preco">R$ 150,00</div>
+
+    <div class="selecao">
+      <strong>Gênero:</strong>
+      <div class="opcoes genero" data-produto="amarela">
+        <div class="opcao-btn" data-genero="Masculina">Masc.</div>
+        <div class="opcao-btn" data-genero="Feminina">Fem.</div>
+      </div>
+
+      <strong>Tamanho:</strong>
+      <div class="opcoes tamanho" data-produto="amarela">
+        <div class="opcao-btn" data-tamanho="P">P</div>
+        <div class="opcao-btn" data-tamanho="M">M</div>
+        <div class="opcao-btn" data-tamanho="G">G</div>
+        <div class="opcao-btn" data-tamanho="GG">GG</div>
+      </div>
+    </div>
+
+    <button class="comprar-btn">Comprar</button>
+  </div>
+
+  <!-- Produto 3 -->
+  <div class="produto" data-produto="branca-puma">
+    <img src="https://i.postimg.cc/rm6wgQ88/branca-puma.jpg" alt="Camisa Branca Puma" />
+    <h3>
+      Camisa Torcedor 2025 | Esporte Clube Bahia | Puma Branca
+      <span class="personalizacao">*disponível para personalização</span>
+    </h3>
+    <p>Bahia Torcedor Home Jersey 25</p>
+    <div class="preco">R$ 150,00</div>
+
+    <div class="selecao">
+      <strong>Gênero:</strong>
+      <div class="opcoes genero" data-produto="branca-puma">
+        <div class="opcao-btn" data-genero="Masculina">Masc.</div>
+        <div class="opcao-btn" data-genero="Feminina">Fem.</div>
+      </div>
+
+      <strong>Tamanho:</strong>
+      <div class="opcoes tamanho" data-produto="branca-puma">
+        <div class="opcao-btn" data-tamanho="P">P</div>
+        <div class="opcao-btn" data-tamanho="M">M</div>
+        <div class="opcao-btn" data-tamanho="G">G</div>
+        <div class="opcao-btn" data-tamanho="GG">GG</div>
+      </div>
+    </div>
+
+    <button class="comprar-btn">Comprar</button>
+  </div>
+
+  <!-- Produto 4 -->
+  <div class="produto" data-produto="tricolor-antiga">
+    <img src="https://i.postimg.cc/pTDXSzTK/tricolor-antiga.jpg" alt="Camisa Tricolor Antiga" />
+    <h3>
+      Camisa do Bahia Esquadrão 2024 | Esporte Clube Bahia
+      <span class="personalizacao">*disponível para personalização</span>
+    </h3>
+    <p>Camisa Bahia 2024 Uniforme 2 Jogo
+      A camisa 2 do Tricolor de Aço, conta com um design distinto e moderno no tradicional tricolor do clube. Apresenta o escudo do Bahia bordado no lado esquerdo do peito, enquanto o logo da Esquadrão aparece no lado direito em branco. Na parte inferior direita, há um selo com o nome da coleção deste ano, "Paixão Que Vibra". Para finalizar, nas costas tem a inscrição BBMP estampado..</p>
+    <div class="preco">R$ 150,00</div>
+
+    <div class="selecao">
+      <strong>Gênero:</strong>
+      <div class="opcoes genero" data-produto="tricolor-antiga">
+        <div class="opcao-btn" data-genero="Masculina">Masc.</div>
+        <div class="opcao-btn" data-genero="Feminina">Fem.</div>
+      </div>
+
+      <strong>Tamanho:</strong>
+      <div class="opcoes tamanho" data-produto="tricolor-antiga">
+        <div class="opcao-btn" data-tamanho="P">P</div>
+        <div class="opcao-btn" data-tamanho="M">M</div>
+        <div class="opcao-btn" data-tamanho="G">G</div>
+        <div class="opcao-btn" data-tamanho="GG">GG</div>
+      </div>
+    </div>
+
+    <button class="comprar-btn">Comprar</button>
+  </div>
+
+  <!-- Produto 5 -->
+  <div class="produto" data-produto="azul">
+    <img src="https://i.postimg.cc/66fpLrFX/azul.jpg" alt="Camisa Azul" />
+    <h3>
+      Camisa Jogo 3 | Esporte Clube Bahia
+      <span class="personalizacao">*disponível para personalização</span>
+    </h3>
+    <p>Desenvolvida pelo Esquadrão, a camisa II do Bahia para 2024 é inspirada no mascote do clube o "Homem de Aço".</p>
+    <div class="preco">R$ 150,00</div>
+
+    <div class="selecao">
+      <strong>Gênero:</strong>
+      <div class="opcoes genero" data-produto="azul">
+        <div class="opcao-btn" data-genero="Masculina">Masc.</div>
+        <div class="opcao-btn" data-genero="Feminina">Fem.</div>
+      </div>
+
+      <strong>Tamanho:</strong>
+      <div class="opcoes tamanho" data-produto="azul">
+        <div class="opcao-btn" data-tamanho="P">P</div>
+        <div class="opcao-btn" data-tamanho="M">M</div>
+        <div class="opcao-btn" data-tamanho="G">G</div>
+        <div class="opcao-btn" data-tamanho="GG">GG</div>
+      </div>
+    </div>
+
+    <button class="comprar-btn">Comprar</button>
+  </div>
+
+  <!-- Produto 6 -->
+  <div class="produto" data-produto="branca-listra">
+    <img src="https://i.postimg.cc/zXDXdL1R/branca-com-listra.jpg" alt="Camisa Branca com Listra" />
+    <h3>
+      Camisa Esquadrão Bahia I Home 2024/2025 | Esporte Clube Bahia
+      <span class="personalizacao">*disponível para personalização</span>
+    </h3>
+    <p>Camisa Bahia I 2024 "Pela Nossa Gente" Mostre todo o seu orgulho pelo Tricolor de Aço com a nova Camisa Bahia I 2024 "Pela Nossa Gente"! Criada pela Esquadrão, essa camisa celebra a paixão e o sentimento pelo Bahia, destacando uma faixa tricolor central em homenagem à bandeira do Estado e às conquistas nacionais. Por que você vai adorar a Camisa Bahia I 2024: Design Inspirador: Apresentando uma faixa tricolor central que referencia o Estado e as conquistas nacionais do Bahia, esta camisa é uma verdadeira celebração da história e do orgulho tricolor. Detalhes Especiais: A camisa inclui o triângulo da bandeira estadual e as estrelas representando os títulos brasileiros de 1959 e 1988. Nos punhos, há menções alternadas aos títulos de 59 e 88, e um selo especial com a frase “Paixão Que Vibra” na barra inferior direita. Origem Torcedora: Projetada pelo torcedor Kaim Argolo, vencedor do concurso Manto do Esquadrão 6.0, trazendo um toque pessoal e autêntico para o manto de 2024.</p>
+    <div class="preco">R$ 150,00</div>
+
+    <div class="selecao">
+      <strong>Gênero:</strong>
+      <div class="opcoes genero" data-produto="branca-listra">
+        <div class="opcao-btn" data-genero="Masculina">Masc.</div>
+        <div class="opcao-btn" data-genero="Feminina">Fem.</div>
+      </div>
+
+      <strong>Tamanho:</strong>
+      <div class="opcoes tamanho" data-produto="branca-listra">
+        <div class="opcao-btn" data-tamanho="P">P</div>
+        <div class="opcao-btn" data-tamanho="M">M</div>
+        <div class="opcao-btn" data-tamanho="G">G</div>
+        <div class="opcao-btn" data-tamanho="GG">GG</div>
+      </div>
+    </div>
+
+    <button class="comprar-btn">Comprar</button>
+  </div>
+
+</div>
+
+<script>
+  // Aqui vai o código JavaScript que te enviei:
+  
+  const opcoes = document.querySelectorAll('.opcao-btn');
+
+  opcoes.forEach(opcao => {
+    opcao.addEventListener('click', () => {
+      const grupo = opcao.parentElement;
+      grupo.querySelectorAll('.opcao-btn').forEach(o => o.classList.remove('selecionado'));
+      opcao.classList.add('selecionado');
+    });
+  });
+
+  const botoesCompra = document.querySelectorAll('.comprar-btn');
+
+  botoesCompra.forEach(botao => {
+    botao.addEventListener('click', () => {
+      const produto = botao.closest('.produto');
+      const nome = produto.querySelector('h3').innerText;
+      const generoSelecionado = produto.querySelector('.genero .selecionado');
+      const tamanhoSelecionado = produto.querySelector('.tamanho .selecionado');
+
+      if (!generoSelecionado || !tamanhoSelecionado) {
+        alert('Por favor, selecione gênero e tamanho!');
+        return;
+      }
+
+      const genero = generoSelecionado.innerText;
+      const tamanho = tamanhoSelecionado.innerText;
+
+      const mensagem = `Olá, gostaria de adquirir a camisa ${genero} ${nome}, no tamanho ${tamanho}. Qual a disponibilidade de entrega?`;
+
+      const numeroWhatsApp = '5571991274394'; // <-- Substitua pelo seu número com DDD
+
+      const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+
+      window.open(url, '_blank');
+    });
+  });
+</script>

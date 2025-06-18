@@ -406,6 +406,44 @@ background-color 0.3s ease;
       });
     });
   });
+
+<!-- …Código já existente… -->
+
+  /* …funções de estoque e seleção já existentes… */
+
+  /* === Envio da mensagem personalizada via WhatsApp === */
+  document.querySelectorAll('.comprar-btn').forEach(botao => {
+    botao.addEventListener('click', () => {
+      const produto          = botao.closest('.produto');
+      const nomeProduto      = produto.querySelector('h3').innerText.trim();
+
+      // Usa os botões que já ganham a classe .ativo quando selecionados
+      const generoSelecionado  = produto.querySelector('.genero  .opcao-btn.ativo');
+      const tamanhoSelecionado = produto.querySelector('.tamanho .opcao-btn.ativo');
+
+      if (!generoSelecionado || !tamanhoSelecionado) {
+        alert('Por favor, selecione gênero e tamanho!');
+        return;
+      }
+
+      const genero = generoSelecionado.innerText.trim();
+      const tamanho = tamanhoSelecionado.innerText.trim();
+
+      // Mensagem que irá no WhatsApp
+      const mensagem = `Olá, gostaria de adquirir a camisa ${genero} ${nomeProduto}, no tamanho ${tamanho}. Qual a disponibilidade de entrega?`;
+
+      const numeroWhatsApp = '5571991274394'; // coloque aqui o seu número com DDD
+      const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+
+      window.open(url, '_blank');
+    });
+  });
+</script>
+
+</body>
+</html>
+    });
+  });
 </script>
 
 </body>

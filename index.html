@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Catálogo de Camisas</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Oswald&display=swap" rel="stylesheet" />
@@ -44,7 +44,7 @@
     padding: 30px 15px;
     border-bottom: 1px solid #eee;
     text-align: center;
-    position: relative;
+    position: relative; /* importante para posicionar selo */
   }
   .produto:last-child {
     border-bottom: none;
@@ -59,48 +59,55 @@
   .produto h3 {
     font-size: 26px;
     font-family: 'Cinzel', serif;
-    margin-bottom: 5px; /* menos espaço aqui */
+    margin-bottom: 5px;
     position: relative;
   }
-  /* Novo: texto discreto "disponível para personalização" */
   .personalizacao {
     font-size: 12px;
     color: #888888;
     position: absolute;
     right: 15px;
-    top: 40px; /* ajusta para ficar logo abaixo do h3 */
+    top: 40px;
     font-style: italic;
     user-select: none;
   }
   .produto p {
     font-size: 16px;
     color: #555;
-    margin: 20px 0 30px 0; /* mais espaço entre descrição e seleções */
+    margin: 20px 0 30px 0;
     text-align: left;
   }
   .preco {
     font-weight: bold;
     color: #10395b;
-    font-size: 35px;
+    font-size: 65px;
     margin-bottom: 20px;
   }
 
   .selecao {
     text-align: left;
-    position: absolute;
-    left: 15px;
-    bottom: 90px;
+    margin-bottom: 30px; /* espaço entre gênero e tamanho */
   }
+
   .selecao strong {
-    font-size: 14px;
-    display: block;
-    margin-bottom: 6px;
+    display: block;       /* força o strong a ficar em linha separada */
+    font-weight: bold;
+    margin-bottom: 10px;  /* espaço entre o título e as opções */
+    font-size: 18px;
+    color: #10395b;
   }
+
   .opcoes {
     display: flex;
-    gap: 8px;
-    margin-bottom: 14px;
+    gap: 8px;            /* espaçamento maior entre botões */
+    margin-bottom: 8px;  /* espaço abaixo dos botões */
   }
+
+  /* Tamanhos escondidos inicialmente */
+  .opcoes.tamanho {
+    display: none;
+  }
+
   .opcao-btn {
     padding: 6px 12px;
     background-color: #eee;
@@ -109,6 +116,7 @@
     cursor: pointer;
     font-size: 13px;
     transition: background-color 0.3s ease;
+    user-select: none;
   }
   .opcao-btn:hover {
     background-color: #ddd;
@@ -119,7 +127,7 @@
     border-color: #10395b;
   }
   .disponibilidade {
-    font-size: 12px;
+    font-size: 14px;
     color: #10395b;
     margin-bottom: 10px;
     max-width: 200px;
@@ -135,10 +143,42 @@
     font-size: 20px;
     font-weight: bold;
     margin-top: 40px;
-    transition: background-color 0.3s ease;
+    transition: 
+background-color 0.3s ease;
   }
   .comprar-btn:hover {
     background-color: #082136;
+  }
+
+ /* Destaque permanente para Puma Branca e Tricolor */
+.produto[data-produto="branca-puma"],
+.produto[data-produto="tricolor"] {
+  background-color: white;
+   border: 3px solid rgba(26, 56, 90, 0.5); /* 0.3 = 30% opacidade */
+  box-shadow: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.produto[data-produto="branca-puma"]:hover,
+.produto[data-produto="tricolor"]:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.4); /* Sombra suave em volta toda */
+}
+
+  /* Selo Pronta Entrega */
+  .selo {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    z-index: 2;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-family: 'Oswald', sans-serif;
   }
 
   @media (max-width: 600px) {
@@ -171,38 +211,69 @@
 
 <div class="container">
 
-  <!-- PRODUTO EXEMPLO -->
-  <!-- Copie e edite este bloco para cada camisa -->
-  <div class="produto" data-produto="tricolor">
-    <img src="https://i.postimg.cc/zGcBHq6H/tricolor.jpg" alt="Camisa Tricolor" />
+  <!-- Camisa Tricolor (destaque) -->
+<div class="produto" data-produto="tricolor" style="margin-bottom: 30px;">
+  <div class="selo">Pronta Entrega</div>
+  <img src="https://i.postimg.cc/zGcBHq6H/tricolor.jpg" alt="Camisa Tricolor" />
+  <h3>
+    Camisa Torcedor 2025 | Esporte Clube Bahia | Puma Tricolor
+    <span class="personalizacao">*disponível para personalização</span>
+  </h3>
+  <p>Bahia Torcedor Away Jersey 25</p>
+  <div class="preco">R$ 150,00</div>
+
+  <div class="selecao">
+    <strong>Gênero:</strong>
+    <div class="opcoes genero" data-produto="tricolor">
+      <div class="opcao-btn" data-genero="Masculina">Masc.</div>
+      <div class="opcao-btn" data-genero="Feminina">Fem.</div>
+    </div>
+
+    <strong>Tamanho:</strong>
+    <div class="opcoes tamanho" data-produto="tricolor">
+      <div class="opcao-btn" data-tamanho="P">P</div>
+      <div class="opcao-btn" data-tamanho="M">M</div>
+      <div class="opcao-btn" data-tamanho="G">G</div>
+      <div class="opcao-btn" data-tamanho="GG">GG</div>
+    </div>
+  </div>
+  <div class="disponibilidade" data-produto="tricolor">Selecione gênero e tamanho</div>
+
+  <button class="comprar-btn">Comprar</button>
+</div>
+
+  <!-- Camisa Branca Puma (destaque) -->
+  <div class="produto" data-produto="branca-puma">
+    <div class="selo">Pronta Entrega</div>
+    <img src="https://i.postimg.cc/rm6wgQ88/branca-puma.jpg" alt="Camisa Branca Puma" />
     <h3>
-      Camisa Torcedor 2025 | Esporte Clube Bahia | Puma Tricolor
+      Camisa Torcedor 2025 | Esporte Clube Bahia | Puma Branca
       <span class="personalizacao">*disponível para personalização</span>
     </h3>
-    <p>Bahia Torcedor Away Jersey 25</p>
+    <p>Camisa Torcedor 2025 | Esporte Clube Bahia | Puma Branca</p>
     <div class="preco">R$ 150,00</div>
 
-    <!-- Seção de seleção de gênero e tamanho -->
     <div class="selecao">
       <strong>Gênero:</strong>
-      <div class="opcoes genero" data-produto="tricolor">
+      <div class="opcoes genero" data-produto="branca-puma">
         <div class="opcao-btn" data-genero="Masculina">Masc.</div>
         <div class="opcao-btn" data-genero="Feminina">Fem.</div>
       </div>
 
       <strong>Tamanho:</strong>
-      <div class="opcoes tamanho" data-produto="tricolor">
+      <div class="opcoes tamanho" data-produto="branca-puma">
         <div class="opcao-btn" data-tamanho="P">P</div>
         <div class="opcao-btn" data-tamanho="M">M</div>
         <div class="opcao-btn" data-tamanho="G">G</div>
         <div class="opcao-btn" data-tamanho="GG">GG</div>
       </div>
     </div>
+    <div class="disponibilidade" data-produto="branca-puma">Selecione gênero e tamanho</div>
 
     <button class="comprar-btn">Comprar</button>
   </div>
 
-  <!-- Produto 2 -->
+ <!-- Camisa Amarela -->
   <div class="produto" data-produto="amarela">
     <img src="https://i.postimg.cc/CKnKjWpP/amarela.jpg" alt="Camisa Amarela" />
     <h3>
@@ -227,48 +298,19 @@
         <div class="opcao-btn" data-tamanho="GG">GG</div>
       </div>
     </div>
+    <div class="disponibilidade" data-produto="amarela">Selecione gênero e tamanho</div>
 
     <button class="comprar-btn">Comprar</button>
   </div>
 
-  <!-- Produto 3 -->
-  <div class="produto" data-produto="branca-puma">
-    <img src="https://i.postimg.cc/rm6wgQ88/branca-puma.jpg" alt="Camisa Branca Puma" />
-    <h3>
-      Camisa Torcedor 2025 | Esporte Clube Bahia | Puma Branca
-      <span class="personalizacao">*disponível para personalização</span>
-    </h3>
-    <p>Bahia Torcedor Home Jersey 25</p>
-    <div class="preco">R$ 150,00</div>
-
-    <div class="selecao">
-      <strong>Gênero:</strong>
-      <div class="opcoes genero" data-produto="branca-puma">
-        <div class="opcao-btn" data-genero="Masculina">Masc.</div>
-        <div class="opcao-btn" data-genero="Feminina">Fem.</div>
-      </div>
-
-      <strong>Tamanho:</strong>
-      <div class="opcoes tamanho" data-produto="branca-puma">
-        <div class="opcao-btn" data-tamanho="P">P</div>
-        <div class="opcao-btn" data-tamanho="M">M</div>
-        <div class="opcao-btn" data-tamanho="G">G</div>
-        <div class="opcao-btn" data-tamanho="GG">GG</div>
-      </div>
-    </div>
-
-    <button class="comprar-btn">Comprar</button>
-  </div>
-
-  <!-- Produto 4 -->
+  <!-- Camisa Tricolor Antiga -->
   <div class="produto" data-produto="tricolor-antiga">
     <img src="https://i.postimg.cc/pTDXSzTK/tricolor-antiga.jpg" alt="Camisa Tricolor Antiga" />
     <h3>
-      Camisa do Bahia Esquadrão 2024 | Esporte Clube Bahia
+      Camisa Torcedor 2025 | Esporte Clube Bahia | Tricolor Antiga
       <span class="personalizacao">*disponível para personalização</span>
     </h3>
-    <p>Camisa Bahia 2024 Uniforme 2 Jogo
-      A camisa 2 do Tricolor de Aço, conta com um design distinto e moderno no tradicional tricolor do clube. Apresenta o escudo do Bahia bordado no lado esquerdo do peito, enquanto o logo da Esquadrão aparece no lado direito em branco. Na parte inferior direita, há um selo com o nome da coleção deste ano, "Paixão Que Vibra". Para finalizar, nas costas tem a inscrição BBMP estampado..</p>
+    <p>Bahia Torcedor Away Jersey 25 Antiga</p>
     <div class="preco">R$ 150,00</div>
 
     <div class="selecao">
@@ -286,64 +328,7 @@
         <div class="opcao-btn" data-tamanho="GG">GG</div>
       </div>
     </div>
-
-    <button class="comprar-btn">Comprar</button>
-  </div>
-
-  <!-- Produto 5 -->
-  <div class="produto" data-produto="azul">
-    <img src="https://i.postimg.cc/66fpLrFX/azul.jpg" alt="Camisa Azul" />
-    <h3>
-      Camisa Jogo 3 | Esporte Clube Bahia
-      <span class="personalizacao">*disponível para personalização</span>
-    </h3>
-    <p>Desenvolvida pelo Esquadrão, a camisa II do Bahia para 2024 é inspirada no mascote do clube o "Homem de Aço".</p>
-    <div class="preco">R$ 150,00</div>
-
-    <div class="selecao">
-      <strong>Gênero:</strong>
-      <div class="opcoes genero" data-produto="azul">
-        <div class="opcao-btn" data-genero="Masculina">Masc.</div>
-        <div class="opcao-btn" data-genero="Feminina">Fem.</div>
-      </div>
-
-      <strong>Tamanho:</strong>
-      <div class="opcoes tamanho" data-produto="azul">
-        <div class="opcao-btn" data-tamanho="P">P</div>
-        <div class="opcao-btn" data-tamanho="M">M</div>
-        <div class="opcao-btn" data-tamanho="G">G</div>
-        <div class="opcao-btn" data-tamanho="GG">GG</div>
-      </div>
-    </div>
-
-    <button class="comprar-btn">Comprar</button>
-  </div>
-
-  <!-- Produto 6 -->
-  <div class="produto" data-produto="branca-listra">
-    <img src="https://i.postimg.cc/zXDXdL1R/branca-com-listra.jpg" alt="Camisa Branca com Listra" />
-    <h3>
-      Camisa Esquadrão Bahia I Home 2024/2025 | Esporte Clube Bahia
-      <span class="personalizacao">*disponível para personalização</span>
-    </h3>
-    <p>Camisa Bahia I 2024 "Pela Nossa Gente" Mostre todo o seu orgulho pelo Tricolor de Aço com a nova Camisa Bahia I 2024 "Pela Nossa Gente"! Criada pela Esquadrão, essa camisa celebra a paixão e o sentimento pelo Bahia, destacando uma faixa tricolor central em homenagem à bandeira do Estado e às conquistas nacionais. Por que você vai adorar a Camisa Bahia I 2024: Design Inspirador: Apresentando uma faixa tricolor central que referencia o Estado e as conquistas nacionais do Bahia, esta camisa é uma verdadeira celebração da história e do orgulho tricolor. Detalhes Especiais: A camisa inclui o triângulo da bandeira estadual e as estrelas representando os títulos brasileiros de 1959 e 1988. Nos punhos, há menções alternadas aos títulos de 59 e 88, e um selo especial com a frase “Paixão Que Vibra” na barra inferior direita. Origem Torcedora: Projetada pelo torcedor Kaim Argolo, vencedor do concurso Manto do Esquadrão 6.0, trazendo um toque pessoal e autêntico para o manto de 2024.</p>
-    <div class="preco">R$ 150,00</div>
-
-    <div class="selecao">
-      <strong>Gênero:</strong>
-      <div class="opcoes genero" data-produto="branca-listra">
-        <div class="opcao-btn" data-genero="Masculina">Masc.</div>
-        <div class="opcao-btn" data-genero="Feminina">Fem.</div>
-      </div>
-
-      <strong>Tamanho:</strong>
-      <div class="opcoes tamanho" data-produto="branca-listra">
-        <div class="opcao-btn" data-tamanho="P">P</div>
-        <div class="opcao-btn" data-tamanho="M">M</div>
-        <div class="opcao-btn" data-tamanho="G">G</div>
-        <div class="opcao-btn" data-tamanho="GG">GG</div>
-      </div>
-    </div>
+    <div class="disponibilidade" data-produto="tricolor-antiga">Selecione gênero e tamanho</div>
 
     <button class="comprar-btn">Comprar</button>
   </div>
@@ -351,42 +336,77 @@
 </div>
 
 <script>
-  // Aqui vai o código JavaScript que te enviei:
-  
-  const opcoes = document.querySelectorAll('.opcao-btn');
+  // Estoque por produto, gênero e tamanho
+  const estoque = {
+    "tricolor": {
+      "Masculina": { "P": 0, "M": 1, "G": 0, "GG": 0 },
+      "Feminina": { "P": 0, "M": 1, "G": 0, "GG": 0 },
+    },
+    "amarela": {
+      "Masculina": { "P": 0, "M": 0, "G": 0, "GG": 0 },
+      "Feminina": { "P": 0, "M": 0, "G": 0, "GG": 0 },
+    },
+    "branca-puma": {
+      "Masculina": { "P": 0, "M": 2, "G": 0, "GG": 0 },
+      "Feminina": { "P": 0, "M": 2, "G": 0, "GG": 0 },
+    },
+"tricolor-antiga": {
+      "Masculina": { "P": 0, "M": 0, "G": 0, "GG": 0 },
+      "Feminina": { "P": 0, "M": 0, "G": 0, "GG": 0 },
+    },
+  };
 
-  opcoes.forEach(opcao => {
-    opcao.addEventListener('click', () => {
-      const grupo = opcao.parentElement;
-      grupo.querySelectorAll('.opcao-btn').forEach(o => o.classList.remove('selecionado'));
-      opcao.classList.add('selecionado');
+  // Função para gerenciar seleção de gênero e mostrar tamanhos disponíveis
+  document.querySelectorAll('.opcoes.genero').forEach(generoGroup => {
+    generoGroup.querySelectorAll('.opcao-btn').forEach(btnGenero => {
+      btnGenero.addEventListener('click', () => {
+        const produto = generoGroup.dataset.produto;
+        // Marca gênero selecionado
+        generoGroup.querySelectorAll('.opcao-btn').forEach(btn => btn.classList.remove('ativo'));
+        btnGenero.classList.add('ativo');
+        // Exibe os tamanhos
+        const tamanhoGroup = document.querySelector(`.opcoes.tamanho[data-produto="${produto}"]`);
+        tamanhoGroup.style.display = 'flex';
+        // Desmarca todos os tamanhos
+        tamanhoGroup.querySelectorAll('.opcao-btn').forEach(btn => btn.classList.remove('ativo'));
+        // Atualiza disponibilidade
+        const disp = document.querySelector(`.disponibilidade[data-produto="${produto}"]`);
+        disp.textContent = 'Selecione o tamanho';
+      });
     });
   });
 
-  const botoesCompra = document.querySelectorAll('.comprar-btn');
+  // Função para gerenciar seleção de tamanho e mostrar estoque
+  document.querySelectorAll('.opcoes.tamanho').forEach(tamanhoGroup => {
+    tamanhoGroup.querySelectorAll('.opcao-btn').forEach(btnTamanho => {
+      btnTamanho.addEventListener('click', () => {
+        const produto = tamanhoGroup.dataset.produto;
+        const generoGroup = document.querySelector(`.opcoes.genero[data-produto="${produto}"]`);
+        const btnGeneroAtivo = generoGroup.querySelector('.opcao-btn.ativo');
+        if (!btnGeneroAtivo) {
+          alert('Por favor, selecione o gênero primeiro.');
+          return;
+        }
+        const generoSelecionado = btnGeneroAtivo.dataset.genero;
+        const tamanhoSelecionado = btnTamanho.dataset.tamanho;
 
-  botoesCompra.forEach(botao => {
-    botao.addEventListener('click', () => {
-      const produto = botao.closest('.produto');
-      const nome = produto.querySelector('h3').innerText;
-      const generoSelecionado = produto.querySelector('.genero .selecionado');
-      const tamanhoSelecionado = produto.querySelector('.tamanho .selecionado');
+        // Marca tamanho selecionado
+        tamanhoGroup.querySelectorAll('.opcao-btn').forEach(btn => btn.classList.remove('ativo'));
+        btnTamanho.classList.add('ativo');
 
-      if (!generoSelecionado || !tamanhoSelecionado) {
-        alert('Por favor, selecione gênero e tamanho!');
-        return;
-      }
+        // Atualiza disponibilidade
+        const disp = document.querySelector(`.disponibilidade[data-produto="${produto}"]`);
+        const qtdDisponivel = estoque[produto][generoSelecionado][tamanhoSelecionado] || 0;
 
-      const genero = generoSelecionado.innerText;
-      const tamanho = tamanhoSelecionado.innerText;
-
-      const mensagem = `Olá, gostaria de adquirir a camisa ${genero} ${nome}, no tamanho ${tamanho}. Qual a disponibilidade de entrega?`;
-
-      const numeroWhatsApp = '5571991274394'; // <-- Substitua pelo seu número com DDD
-
-      const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-
-      window.open(url, '_blank');
+        if (qtdDisponivel > 0) {
+          disp.textContent = `Quantidade disponível: ${qtdDisponivel}`;
+        } else {
+          disp.textContent = 'Indisponível';
+        }
+      });
     });
   });
 </script>
+
+</body>
+</html>
